@@ -8,25 +8,36 @@ import {
   DialogTitle,
 } from "@/components/ui/Dialog";
 import { Button } from "@/components/ui/Button";
-import RoundPage from "@/components/RoundPage";
+import RoundPage, { type RoundConfig } from "@/components/RoundPage";
 import { LocalStoreService } from "@/lib/LocalstoreService";
-import Header from "@/public/images/header-no-frams.png";
+import Header from "@/assets/images/header-no-frams.png";
 import { cn } from "@/lib/utils";
 
 export const getRoundConfig = (round: number) => {
-  const images = Object.keys(
-    import.meta.glob("@/public/images/*/*", { eager: true })
-  ).filter((i) => i.split("images/")[1].split("/")[0] === `round-${round}`);
+  const allImageModules = import.meta.glob("/src/assets/images/*/*", {
+    eager: true,
+    import: "default",
+  });
+
+  const sourcePathsForRound = Object.keys(allImageModules).filter(
+    (sourcePath) => {
+      const parts = sourcePath.split("/");
+
+      return parts.length >= 5 && parts[4] === `round-${round}`;
+    }
+  );
+
+  const participants = sourcePathsForRound.map((sourcePath, index) => ({
+    id: index + 1,
+    image: allImageModules[sourcePath],
+    name: `Participant ${index + 1}`,
+  }));
 
   return {
     id: round,
-    requiredSelections: (images.length / 2) | 0,
-    participants: images.map((_, i) => ({
-      id: i + 1,
-      image: _,
-      name: `Participant ${i + 1}`,
-    })),
-  };
+    requiredSelections: (participants.length / 2) | 0,
+    participants: participants,
+  } as RoundConfig;
 };
 
 export default function MainMenu() {

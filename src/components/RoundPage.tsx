@@ -1,9 +1,7 @@
-"use client";
-
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import Timer from "@/components/Timer";
-import gif from "@/public/gifs/video.gif";
+import gif from "@/assets/gifs/video.gif";
 import { X } from "lucide-react";
 import { LocalStoreService } from "@/lib/LocalstoreService";
 
@@ -13,7 +11,7 @@ interface Participant {
   name: string;
 }
 
-interface RoundConfig {
+export interface RoundConfig {
   requiredSelections: number;
   participants: Participant[];
   id: number;
@@ -98,7 +96,7 @@ export default function RoundPage({ round, onReturnToMenu }: RoundPageProps) {
               onClick={() => toggleParticipant(participant.id)}
               disabled={timeExpired}
               className={`
-                transform rotate-45 aspect-square relative overflow-hidden h-20 w-20 border-2 border-blue-400
+                transform -rotate-45 aspect-square relative overflow-hidden h-20 w-20 border-2 border-blue-400
                 ${
                   selectedParticipants.includes(participant.id)
                     ? "opacity-40"
