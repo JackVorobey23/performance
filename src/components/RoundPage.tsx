@@ -72,7 +72,7 @@ export default function RoundPage({ round, onReturnToMenu }: RoundPageProps) {
           onClick={onReturnToMenu}
           className="mt-8 bg-blue-600 hover:bg-blue-500 text-xl py-6 px-8"
         >
-          Return to Main Menu
+          На головну
         </Button>
       </div>
     );
@@ -99,7 +99,7 @@ export default function RoundPage({ round, onReturnToMenu }: RoundPageProps) {
                 transform -rotate-45 aspect-square relative overflow-hidden h-20 w-20 border-2 border-blue-400
                 ${
                   selectedParticipants.includes(participant.id)
-                    ? "opacity-40"
+                    ? "grayscale"
                     : "shadow-lg shadow-green-400/30"
                 }
                 ${

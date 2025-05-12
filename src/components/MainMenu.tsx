@@ -17,8 +17,7 @@ export const getRoundConfig = (round: number) => {
   const allImageModules = import.meta.glob("/src/assets/images/*/*", {
     eager: true,
     import: "default",
-  });
-
+  }) as Record<string, string>;
   const sourcePathsForRound = Object.keys(allImageModules).filter(
     (sourcePath) => {
       const parts = sourcePath.split("/");
@@ -27,15 +26,44 @@ export const getRoundConfig = (round: number) => {
     }
   );
 
-  const participants = sourcePathsForRound.map((sourcePath, index) => ({
-    id: index + 1,
-    image: allImageModules[sourcePath],
-    name: `Participant ${index + 1}`,
-  }));
+  const participants = sourcePathsForRound.map((sourcePath, index) => {
+    const name = allImageModules[sourcePath].includes("pmaxym")
+      ? "Максим"
+      : allImageModules[sourcePath].includes("slavik")
+      ? "Славік"
+      : allImageModules[sourcePath].includes("arianna")
+      ? "Гранде"
+      : allImageModules[sourcePath].includes("lokhshun")
+      ? "Локшин"
+      : allImageModules[sourcePath].includes("svetlana")
+      ? "Світлана"
+      : allImageModules[sourcePath].includes("ruslan")
+      ? "Руслан"
+      : `Participant ${index + 1}`;
+
+    return {
+      id: index + 1,
+      image: allImageModules[sourcePath],
+      name: name,
+    };
+  });
+
+  const requiredSelections =
+    round === 1
+      ? 5
+      : round === 2
+      ? 4
+      : round === 3
+      ? 5
+      : round === 4
+      ? 4
+      : round === 5
+      ? 5
+      : 1;
 
   return {
     id: round,
-    requiredSelections: (participants.length / 2) | 0,
+    requiredSelections: requiredSelections,
     participants: participants,
   } as RoundConfig;
 };
