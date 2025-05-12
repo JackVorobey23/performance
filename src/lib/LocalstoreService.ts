@@ -2,10 +2,10 @@ export type LocalStoreKey = `round-${number}`;
 
 export class LocalStoreService {
   static setImages(key: LocalStoreKey, value: string[]) {
-    localStorage.setItem(key, JSON.stringify(value));
+    sessionStorage.setItem(key, JSON.stringify(value));
   }
   static getImages(round: LocalStoreKey) {
-    const imagesJSON = localStorage.getItem(round);
+    const imagesJSON = sessionStorage.getItem(round);
 
     if (imagesJSON) {
       return JSON.parse(imagesJSON) as string[];
