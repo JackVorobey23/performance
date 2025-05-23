@@ -103,7 +103,7 @@ export default function RoundPage({ round, onReturnToMenu }: RoundPageProps) {
           key={p.id}
           src={p.image}
           alt={p.name}
-          className={`transition-all duration-200 border-1 border-blue-400 ${
+          className={`transition-all duration-200 border-1 border-blue-400 -rotate-90 ${
             selectedParticipants.includes(p.id)
               ? "grayscale"
               : "shadow-lg shadow-green-400/30"
