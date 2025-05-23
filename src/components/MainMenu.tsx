@@ -27,19 +27,7 @@ export const getRoundConfig = (round: number) => {
   );
 
   const participants = sourcePathsForRound.map((sourcePath, index) => {
-    const name = allImageModules[sourcePath].includes("pmaxym")
-      ? "Максим"
-      : allImageModules[sourcePath].includes("slavik")
-      ? "Славік"
-      : allImageModules[sourcePath].includes("arianna")
-      ? "Гранде"
-      : allImageModules[sourcePath].includes("lokhshun")
-      ? "Локшин"
-      : allImageModules[sourcePath].includes("svetlana")
-      ? "Світлана"
-      : allImageModules[sourcePath].includes("ruslan")
-      ? "Руслан"
-      : `Participant ${index + 1}`;
+    const name = `Учасник ${index + 1}`;
 
     return {
       id: index + 1,
@@ -49,17 +37,7 @@ export const getRoundConfig = (round: number) => {
   });
 
   const requiredSelections =
-    round === 1
-      ? 5
-      : round === 2
-      ? 4
-      : round === 3
-      ? 5
-      : round === 4
-      ? 4
-      : round === 5
-      ? 5
-      : 1;
+    round === 1 ? 5 : round === 2 ? 5 : round === 3 ? 4 : round === 4 ? 7 : 0;
 
   return {
     id: round,
@@ -116,7 +94,7 @@ export default function MainMenu() {
       </div>
 
       <div className="flex flex-wrap justify-around gap-6 w-full place-items-center">
-        {[1, 2, 3, 4, 5].map((round) => {
+        {[1, 2, 3, 4].map((round) => {
           const disabled =
             LocalStoreService.getImages(`round-${round}`).length > 0;
           return (
@@ -125,7 +103,7 @@ export default function MainMenu() {
               disabled={disabled}
               onClick={() => handleRoundClick(round)}
               className={cn(
-                "bg-blue-700 border border-blue-200 hover:bg-blue-600 text-white p-8 transform scale-75 rotate-45 aspect-square flex items-center justify-center text-2xl font-bold transition-all hover:scale-[80%] shadow-lg w-[40%] max-w-[250px]",
+                "bg-blue-700 border border-blue-200 hover:bg-blue-600 min-w-36 text-white p-8 transform scale-75 rotate-45 aspect-square flex items-center justify-center text-2xl font-bold transition-all hover:scale-[80%] shadow-lg w-[40%] max-w-[250px]",
                 disabled && "opacity-50"
               )}
             >
