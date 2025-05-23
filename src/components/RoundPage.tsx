@@ -123,7 +123,7 @@ export default function RoundPage({ round, onReturnToMenu }: RoundPageProps) {
   if (showResult) {
     return (
       <div className="flex flex-col items-center justify-center w-full max-w-4xl">
-        <div className="mb-8 w-full max-w-md">
+        <div className="mb-2 w-full max-w-md">
           {timeExpired ? (
             <span className="text-2xl font-bold text-center">
               Час закінчився!
@@ -140,7 +140,7 @@ export default function RoundPage({ round, onReturnToMenu }: RoundPageProps) {
         </div>
         <Button
           onClick={onReturnToMenu}
-          className="mt-8 bg-blue-600 hover:bg-blue-500 text-xl py-6 px-8"
+          className="bg-blue-600 hover:bg-blue-500 text-xl py-6 px-8"
         >
           На головну
         </Button>
