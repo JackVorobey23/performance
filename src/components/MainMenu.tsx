@@ -37,7 +37,7 @@ export const getRoundConfig = (round: number) => {
   });
 
   const requiredSelections =
-    round === 1 ? 5 : round === 2 ? 5 : round === 3 ? 4 : round === 4 ? 7 : 0;
+    round === 1 ? 5 : round === 2 ? 5 : round === 3 ? 4 : round === 4 ? 9 : 0;
 
   return {
     id: round,
